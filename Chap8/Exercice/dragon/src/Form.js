@@ -18,11 +18,12 @@ class Form extends Component {
     }
 
     render() {
-        const { dragon } = this.props;
+        const { dragon, message } = this.props;
 
         return (
             <form onSubmit={this.handleSubmit}>
                 <div className="form-group Form-header">
+                    {message && <p className="alter alter-warning">{message}</p>}
                     <input
                         type="text"
                         className="form-control"
@@ -30,9 +31,9 @@ class Form extends Component {
                         onChange={this.handleChange}
                     />
                 </div>
-                <button 
-                    disabled={dragon == ''} 
-                    type="submit" 
+                <button
+                    disabled={dragon == ''}
+                    type="submit"
                     className="btn btn-primary"
                 >Add</button>
             </form>
@@ -40,7 +41,7 @@ class Form extends Component {
     }
 }
 
-const mapStateToProps = state => { return { dragon: state.dragon } };
+const mapStateToProps = state => { return { dragon: state.dragon, message: state.message } };
 
 const mapDispatchToProps = dispatch => {
 
