@@ -12,18 +12,23 @@
 <body>
     <div id="root"></div>
     <script type="text/babel">
-        const App = () =>{
+
+        const App = () => {
+            // on doit utiliser un useState pour avoir le state dans une fonction
+            const [count, setCount] = React.useState(0);
 
             return (
                 <div className="container">
-                    <Student name="Alan" grade="professor" />
-                    <Student name="Albert" grade="professor" />
+                    <p>{count}</p>
+                    <button
+                        onClick={() => setCount( count + 1 )}
+                    >Count + 1</button>
                 </div>
             )
         }
 
         ReactDOM.render(
-            <App name="Alan" />,
+            <App />,
             document.getElementById('root') // montage de deux composants
         );
     </script>

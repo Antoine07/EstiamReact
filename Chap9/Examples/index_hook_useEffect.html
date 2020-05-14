@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <metacharset="UTF-8" />
+    <title>Hello React</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        const Counter = () => {
+            // on doit utiliser un useState pour avoir le state dans une fonction
+            const [count, setCount] = React.useState(0);
+            const [count2, setCount2] = React.useState(0);
+            const [count3, setCount3] = React.useState(0);
+
+            // on montage componentDidMount
+            // componentDidUpdate
+            // componentWillUmount
+            React.useEffect(() => {
+                setTimeout(
+                    () => {
+                        console.log(`First message: You clicked ${count} times`);
+                    }, 1000);
+            });
+
+            React.useEffect(() => {
+                setTimeout(
+                    () => {
+                        console.log(`Second message: You clicked ${count} times`);
+                    }, 1000);
+            });
+
+            React.useEffect(() => {
+                setTimeout(
+                    () => {
+                        console.log(`Count 2 ${count} times`);
+                    }, 1000);
+            }, [count2]);
+
+            React.useEffect(() => {
+                setTimeout(
+                    () => {
+                        console.log(`Count 3 ${count} times`);
+                    }, 1000);
+            }, [count3]);
+
+            // ne cible personne ce useEffect ne watch aucun state
+            React.useEffect(() => {
+                setTimeout(
+                    () => {
+                        console.log(`On montage`);
+                    }, 1000);
+            }, []);
+
+            return (
+                <div className="container">
+                    <p>{count}</p>
+                    <p>{count2}</p>
+                    <p>{count3}</p>
+
+                    <button
+                        onClick={() => setCount(count + 1)}
+                    >Count + 1</button>
+                    <button
+                        onClick={() => setCount2(count2 + 1)}
+                    >Count2 + 1</button>
+                    <button
+                        onClick={() => setCount3(count3 + 1)}
+                    >Count3 + 1</button>
+                </div>
+            )
+        }
+
+        ReactDOM.render(
+            <Counter />,
+            document.getElementById('root') // montage de deux composants
+        );
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <metacharset="UTF-8" />
+    <title>Hello React</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        const Counter = () => {
+            // on doit utiliser un useState pour avoir le state dans une fonction
+            const [count, setCount] = React.useState(0);
+
+            // le Hook qui permet de gérer le cycle de vie
+            React.useEffect(() => {
+                setTimeout(
+                    () => {
+                        console.log(`Count  ${count} times`);
+                    }, 1000);
+
+                return () => { console.log('unmount component'); }
+
+            }, [count]);
+
+            return (
+                <div className="container">
+                    <p>{count}</p>
+                    <button
+                        onClick={() => setCount(count + 1)}
+                    >Count + 1</button>
+                </div>
+            )
+        }
+
+        const App = () => {
+            const [visible, setVisible] = React.useState(true);
+            return (
+                <React.Fragment>
+                    <button onClick={() => setVisible(!visible)}>Visible</button>
+                    {visible && <Counter />}
+                </React.Fragment>
+            )
+        }
+
+        ReactDOM.render(
+            <App />,
+            document.getElementById('root') // montage de deux composants
+        );
+    </script>
+</body>
+
+</html>

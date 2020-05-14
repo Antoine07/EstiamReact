@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <metacharset="UTF-8" />
+    <title>Hello React</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        const App = () => {
+            // on doit utiliser un useState pour avoir le state dans une fonction
+            const [count1, setCount1] = React.useState(0);
+            const [count2, setCount2] = React.useState(0);
+
+            return (
+                <div className="container">
+                    <p>Count 1 : {count1}</p>
+                    <p>Count 2 : {count2}</p>
+                    <button
+                        onClick={() => setCount1(count1 + 1)}
+                    >Count + 1</button>
+                    <button
+                        onClick={() => setCount2(count2 - 1)}
+                    >Count - 1</button>
+                </div>
+            )
+        }
+
+        ReactDOM.render(
+            <App />,
+            document.getElementById('root') // montage de deux composants
+        );
+    </script>
+</body>
+
+</html>
