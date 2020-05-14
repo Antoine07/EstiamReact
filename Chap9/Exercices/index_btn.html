@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <metacharset="UTF-8" />
+    <title>Hello React</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        let timer = null;
+
+        const Counter = () => {
+
+            const [count, setCount] = React.useState(0);
+            const [active, setActive] = React.useState(false);
+
+            React.useEffect(() => {
+
+                console.log('mount') // pour lancer le compteur éventuellement
+
+                return () => {
+                    clearInterval(timer);
+                }
+            }, []);
+
+            const start = () => {
+                setActive(true);
+
+                timer = setInterval(() => {
+                    setCount(count => count + 1); // prevState => 
+                    
+                }, 500)
+            }
+
+            const stop = () => {
+                setActive(false); // pour disabled les boutons
+                clearInterval(timer);
+            }
+
+            return (
+                <React.Fragment>
+                    <p>{count}</p>
+                    <p><button disabled={active} onClick={start} >Start</button></p>
+                    <p><button disabled={!active} onClick={stop} >Stop</button></p>
+                </React.Fragment>
+            )
+        }
+
+        const App = () => {
+            const [display, setDisplay] = React.useState(false);
+
+            const toggle = () => setDisplay(!display);
+
+            return (
+                <React.Fragment>
+                    <p><button onClick={toggle} >Toggle counter</button></p>
+                    {display && <Counter />}
+                </React.Fragment>
+            )
+        }
+
+        ReactDOM.render(
+            <App />,
+            document.getElementById('root') // montage de deux composants
+        );
+    </script>
+</body>
+
+</html>

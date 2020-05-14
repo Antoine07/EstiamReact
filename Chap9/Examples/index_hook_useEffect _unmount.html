@@ -19,14 +19,11 @@
 
             // le Hook qui permet de gérer le cycle de vie
             React.useEffect(() => {
-                setTimeout(
-                    () => {
-                        console.log(`Count  ${count} times`);
-                    }, 1000);
-
+             
+                // action sur les changements du state et le démontage
                 return () => { console.log('unmount component'); }
 
-            }, [count]);
+            }, []);
 
             return (
                 <div className="container">
