@@ -18,8 +18,8 @@ class App extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.calculatrice.result != prevProps.calculatrice.result && this.props.memory.isMemory) {
-      console.log('prevProps', prevProps.calculatrice);
-      console.log('pros', this.props.calculatrice);
+      // console.log('prevProps', prevProps.calculatrice);
+      // console.log('pros', this.props.calculatrice);
 
       const { number1, number2 } = prevProps.calculatrice;
       const { result, operator } = this.props.calculatrice;
@@ -34,7 +34,7 @@ class App extends Component {
   }
 
   render() {
-    const { addition, multiplication, setMemory, addMemory } = this.props;
+    const { addition, multiplication, setMemory } = this.props;
     const { number1, number2, result } = this.props.calculatrice;
     const { isMemory, memory } = this.props.memory;
     // au moins un des deux champs non rempli => false
