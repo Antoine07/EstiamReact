@@ -4,7 +4,8 @@ import { sanitize } from '../actions/actions-types';
 const stateInit = {
     number1: '',
     number2: '',
-    result: ''
+    result: '',
+    operator : ''
 }
 
 export default (state = stateInit, action = {}) => {
@@ -26,7 +27,8 @@ export default (state = stateInit, action = {}) => {
                 ...state,
                 result: state.number1 + state.number2,
                 number1: '',
-                number2: ''
+                number2: '',
+                operator : '+'
             }
 
         case MULTIPLICATION:
@@ -35,7 +37,8 @@ export default (state = stateInit, action = {}) => {
                 ...state,
                 result: state.number1 * state.number2,
                 number1: '',
-                number2: ''
+                number2: '',
+                operator : '*'
             }
 
 
