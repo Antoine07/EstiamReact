@@ -8,8 +8,8 @@ const Favorite = ({ choices, reset }) => {
       <View style={{ marginTop: 50 }}>
         <FlatList
           data={choices}
-          renderItem={({ item, index }) => <Text style={styles.btn} >{item}</Text>}
-          keyExtractor={ index => index + '' }
+          renderItem={({ item, index }) => <Text style={styles.btn} >{index + 1} - {item}</Text>}
+          keyExtractor={ index => index  }
         />
         <TouchableOpacity
           onPress={reset}
@@ -88,7 +88,6 @@ const App = () => {
 }
 
 export default App;
-
 
 const styles = StyleSheet.create({
   container: {
