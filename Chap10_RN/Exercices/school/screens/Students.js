@@ -35,26 +35,31 @@ const StudentsScreen = ({ navigation }) => {
       </TouchableOpacity>
       <FlatList
         style={styles.containerStudent}
-        keyExtractor={ item => item.id.toString() }
+        keyExtractor={item => item.id.toString()}
         data={students}
         renderItem={({ item, index }) => {
           const { id, name, attendance, lessons, notes } = item;
 
           return (
-            <View style={[styles.item, styleStudent]}>
-              <View style={{ width: 110 }}>
-                <Image
-                  source={{ uri: `http://lorempixel.com/100/100/cats/${id}` }}
-                  style={{ width: 100, height: 100, padding: 3 }}
-                />
+            <TouchableOpacity
+              style={styles.buttonContainer}
+              onPress={() => navigation.navigate('Abscence', { student : item })}
+            >
+              <View style={[styles.item, styleStudent]}>
+                <View style={{ width: 110 }}>
+                  <Image
+                    source={{ uri: `http://lorempixel.com/100/100/cats/${id}` }}
+                    style={{ width: 100, height: 100, padding: 3 }}
+                  />
+                </View>
+                <View style={{ width: 200 }}>
+                  <Text style={[itemStudent, { fontWeight: "bold", fontSize: 18 }]}>{name}</Text>
+                  <Text style={itemStudent}>Nombre d'abscence(s) : {attendance}</Text>
+                  <Text style={itemStudent}>Nombre de cours : {lessons.length} </Text>
+                  <Text style={itemStudent}>Moyenne : {average(notes)}</Text>
+                </View>
               </View>
-              <View style={{ width: 200 }}>
-                <Text style={[itemStudent, { fontWeight: "bold", fontSize : 18 }]}>{name}</Text>
-                <Text style={itemStudent}>Nombre d'abscence(s) : {attendance}</Text>
-                <Text style={itemStudent}>Nombre de cours : {lessons.length} </Text>
-                <Text style={itemStudent}>Moyenne : {average(notes)}</Text>
-              </View>
-            </View>
+            </TouchableOpacity>
           )
         }}
 

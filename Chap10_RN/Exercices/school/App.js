@@ -6,6 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import StudentsScreen from './screens/Students';
 import LessonsScreen from './screens/Lessons';
+import AbscencesScreen from './screens/Abscences';
 
 import { SchoolProvider } from './store/SchoolProvider';
 import styles from './styles';
@@ -43,6 +44,7 @@ const Nav = () => {
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Students" component={StudentsScreen} />
         <Stack.Screen name="Lessons" component={LessonsScreen} />
+        <Stack.Screen name="Abscences" component={AbscencesScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
