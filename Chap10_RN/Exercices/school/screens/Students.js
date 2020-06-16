@@ -11,6 +11,7 @@ import {
 import { SchoolContext, average } from '../store/SchoolProvider';
 
 import styles from '../styles';
+
 const styleStudent = {
   flex: 1,
   flexDirection: "row"
