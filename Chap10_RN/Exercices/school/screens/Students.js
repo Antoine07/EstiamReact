@@ -11,12 +11,10 @@ import {
 import { SchoolContext, average } from '../store/SchoolProvider';
 
 import styles from '../styles';
-
 const styleStudent = {
   flex: 1,
   flexDirection: "row"
 };
-
 const itemStudent = {
   padding: 2,
   marginBottom: 2
@@ -36,9 +34,9 @@ const StudentsScreen = ({ navigation }) => {
       </TouchableOpacity>
       <FlatList
         style={styles.containerStudent}
-
+        keyExtractor={ item => item.id.toString() }
         data={students}
-        renderItem={({ item }) => {
+        renderItem={({ item, index }) => {
           const { id, name, attendance, lessons, notes } = item;
 
           return (

@@ -1,9 +1,7 @@
 import React, { createContext, useReducer } from 'react';
 
 // fonctions utiles
-
 const average = notes => {
-
     if (notes.length === 0) return null;
 
     return Math.round(10 * (notes.reduce((acc, curr) => acc + curr) / notes.length)) / 10;
