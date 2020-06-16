@@ -33,6 +33,12 @@ const StudentsScreen = ({ navigation }) => {
       >
         <Text style={styles.btnNav}>Home</Text>
       </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.buttonContainer}
+        onPress={() => dispatch({type : 'RESET'})}
+      >
+        <Text style={styles.btnNav}>Reset</Text>
+      </TouchableOpacity>
       <FlatList
         style={styles.containerStudent}
         keyExtractor={item => item.id.toString()}
@@ -42,7 +48,6 @@ const StudentsScreen = ({ navigation }) => {
 
           return (
             <TouchableOpacity
-              style={styles.buttonContainer}
               onPress={() => navigation.navigate('Abscence', { student : item })}
             >
               <View style={[styles.item, styleStudent]}>
