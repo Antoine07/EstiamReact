@@ -1,5 +1,14 @@
 import React, { createContext, useReducer } from 'react';
 
+// fonctions utiles
+
+const average = notes => {
+
+    if (notes.length === 0) return null;
+
+    return Math.round(10 * (notes.reduce((acc, curr) => acc + curr) / notes.length)) / 10;
+}
+
 const SchoolContext = createContext();
 
 // Source de vérité
@@ -29,9 +38,9 @@ const reducer = (state, action) => {
     }
 }
 
-const SchoolProvider = ({children}) => {
+const SchoolProvider = ({ children }) => {
 
-    const [state, dispatch ] = useReducer(reducer, copyInitialState);
+    const [state, dispatch] = useReducer(reducer, copyInitialState);
 
     return (
         <SchoolContext.Provider value={[state, dispatch]}>
@@ -40,4 +49,4 @@ const SchoolProvider = ({children}) => {
     )
 }
 
-export { SchoolContext, SchoolProvider } ;
+export { SchoolContext, SchoolProvider, average };
