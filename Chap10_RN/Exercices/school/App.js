@@ -4,7 +4,7 @@ import { Text, View, StyleSheet, TextInput, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import DetailsScreen from './screens/Details';
+import StudentsScreen from './screens/Students';
 
 import { SchoolProvider } from './store/SchoolProvider';
 
@@ -12,7 +12,7 @@ const HomeScreen = ({ navigation }) => {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
-      <Button title="Go to Details" onPress={() => navigation.navigate('Details')} />
+      <Button title="Go to Students" onPress={() => navigation.navigate('Students')} />
     </View>);
 }
 
@@ -26,7 +26,7 @@ const Nav = () => {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Details" component={DetailsScreen} />
+        <Stack.Screen name="Students" component={StudentsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
