@@ -1,4 +1,7 @@
-import React, { createContext, useReducer } from 'react';
+import React, { createContext, useReducer, useEffect } from 'react';
+
+// module utile (copy object, find, ... ) déjà présent dans React 
+import _ from 'lodash';
 
 // fonctions utiles
 const average = notes => {
@@ -13,6 +16,19 @@ const findStudent = (id, students) => {
     if (student.length > 0) return student[0];
 
     return null;
+}
+
+const selectedMention = (id, behaviours) => {
+    // { id : 1, mention : "A" } structure libre dans behaviours
+    let behaviour = behaviours.find(s => s.id === id) ;
+
+    if (behaviour) { 
+        behaviour = { ...behaviour }
+
+        return behaviour.mention;
+    }
+
+    return "Aucune";
 }
 
 const SchoolContext = createContext();
@@ -35,7 +51,7 @@ const initialState = {
 };
 
 // copy profonde
-const copyInitialState = JSON.parse(JSON.stringify(initialState));
+const copyInitialState = _.cloneDeep(initialState);
 
 const reducer = (state, action) => {
 
@@ -45,8 +61,7 @@ const reducer = (state, action) => {
 
         case "DECREMENT_ATTENDANCE":
         case "INCREMENT_ATTENDANCE":
-            newStudent = { ...state.students.find(student => student.id === action.id) };
-
+            newStudent = _.cloneDeep(state.students.find(student => student.id === action.id));
             const sens = action.count > 0 ? 1 : -1;
             newStudent.attendance = newStudent.attendance > 0 ? newStudent.attendance + sens : (newStudent.attendance == 0 && action.count > 0 ? 1 : 0);
 
@@ -64,7 +79,7 @@ const reducer = (state, action) => {
             students = state.students.map(student => {
                 if (student.id === action.id) return newStudent;
 
-                return student;
+                return _.cloneDeep(student);
             });
 
             return {
@@ -73,13 +88,49 @@ const reducer = (state, action) => {
             }
 
         case 'RESET':
-            
+
             // la fonction map renvoie un nouveau tableau
-            students = state.students.map( student => { student.attendance = 0; return student } );
+            students = state.students.map(student => { student.attendance = 0; return student });
 
             return {
                 ...state,
-                students : students
+                students: students
+            }
+
+        case 'ORDER':
+            const { order } = action;
+
+            students = _.cloneDeep(state.students);
+
+            order === false ? students.sort((a, b) => average(a.notes) > average(b.notes) ? - 1 : 0) : students.sort((a, b) => average(a.notes) < average(b.notes) ? -1 : 0);
+
+            return {
+                ...state,
+                students: students,
+                order: order
+            }
+
+        case 'MENTION':
+
+            const { id, mention } = action;
+
+            let behaviours = _.cloneDeep(state.behaviours);
+
+            console.log(behaviours);
+
+            if( behaviours.filter(behaviour => behaviour.id === id).length === 0){
+                behaviours.push({id : id, mention : mention });
+            }else{
+                behaviours.map( behaviour => {
+                    if(behaviour.id === id ) behaviour.mention = mention;
+
+                    return behaviour;
+                });
+            }
+
+            return {
+                ...state,
+                behaviours: behaviours
             }
 
         default:
@@ -91,6 +142,10 @@ const SchoolProvider = ({ children }) => {
 
     const [state, dispatch] = useReducer(reducer, copyInitialState);
 
+    useEffect(() => {
+        dispatch({ type: 'ORDER', order: false })
+    }, []);
+
     return (
         <SchoolContext.Provider value={[state, dispatch]}>
             {children}
@@ -98,4 +153,4 @@ const SchoolProvider = ({ children }) => {
     )
 }
 
-export { SchoolContext, SchoolProvider, average, findStudent };
+export { SchoolContext, SchoolProvider, average, findStudent, selectedMention };

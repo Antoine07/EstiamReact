@@ -39,7 +39,7 @@ const LessonsScreen = ({ navigation }) => {
           const { title } = item;
 
           return (
-            <View style={[styles.item, styleLesson]}>
+            <View style={[styles.item, styleLesson, { backgroundColor: '#f9c2ff'  }]}>
               <View >
                 <Text style={[itemLesson, { fontWeight: "bold", fontSize : 18 }]}>{title}</Text>
               </View>

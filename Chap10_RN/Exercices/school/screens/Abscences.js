@@ -4,17 +4,21 @@ import {
   View,
   SafeAreaView,
   FlatList,
-  TouchableOpacity
+  TouchableOpacity,
+  Picker
 } from 'react-native';
 
-import { SchoolContext, findStudent } from '../store/SchoolProvider';
+import { SchoolContext, findStudent, selectedMention } from '../store/SchoolProvider';
 
 import styles from '../styles';
 
 const AbscenceScreen = ({ navigation, route }) => {
   const [state, dispatch] = useContext(SchoolContext);
   const { id, name } = route.params.student;
+
+  // refresh 
   const { attendance } = findStudent(id, state.students);
+  const mention = selectedMention(id, state.behaviours);
 
   return (
     <SafeAreaView style={{ flex: 1, alignItems: 'center' }}>
@@ -39,6 +43,16 @@ const AbscenceScreen = ({ navigation, route }) => {
       <View>
         <Text>Abscence de  : {name}, nombre d'abscence : {attendance} </Text>
       </View>
+      <Picker
+        selectedValue={ `${mention}` }
+        style={{ width: 150, height: 50 }}
+        onValueChange={(itemValue, itemIndex) => dispatch({
+          type : 'MENTION', id : id , mention : itemValue })}
+      >
+        <Picker.Item label="Aucune" value="Aucune" />
+        <Picker.Item label="A" value="A" />
+        <Picker.Item label="B" value="B" />
+      </Picker>
     </SafeAreaView>
   );
 }
