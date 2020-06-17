@@ -1,1 +1,1 @@
-export const ADD_AMOUNT = 'ADD_AMOUNT';
+export const SET_AMOUNT = 'SET_AMOUNT';

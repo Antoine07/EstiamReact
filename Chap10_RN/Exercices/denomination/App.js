@@ -15,7 +15,6 @@ const App = () => {
     <Provider store={store}>
       <Denomination />
     </Provider>
-    
   );
 }
 

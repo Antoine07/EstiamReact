@@ -1,18 +1,26 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { useDispatch, useStore } from 'react-redux';
+import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { setAmount } from '../actions/actions-types';
 
 const Denomination = props => {
-
-    const dispatch = useDispatch();
-    const store = useStore()
-
-    const { denomination } = store.getState();
-
-    console.log(denomination)
+    const dispatch = useDispatch(); // Redux Hook
+    const deno = useSelector( state => state.deno );
+    const { amount } = deno;
 
     return (
-        <View><Text>A vous de jouer ...</Text></View>
+        <View style={{ flex : 1, marginTop : 150}}>
+            <TextInput
+                keyboardType="number-pad"
+                placeholder="Amount"
+                style={{borderWidth: 2}}
+                onChangeText={ text => dispatch(setAmount(text))}
+                value={amount}
+            />
+           { amount != '' && <Text>{amount}</Text>}
+        </View>
     );
 }
+
 export default Denomination;
