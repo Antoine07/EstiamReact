@@ -116,8 +116,6 @@ const reducer = (state, action) => {
 
             let behaviours = _.cloneDeep(state.behaviours);
 
-            console.log(behaviours);
-
             if( behaviours.filter(behaviour => behaviour.id === id).length === 0){
                 behaviours.push({id : id, mention : mention });
             }else{

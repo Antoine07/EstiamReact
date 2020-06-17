@@ -16,6 +16,7 @@ const AbscenceScreen = ({ navigation, route }) => {
   const [state, dispatch] = useContext(SchoolContext);
   const { id, name } = route.params.student;
 
+  
   // refresh 
   const { attendance } = findStudent(id, state.students);
   const mention = selectedMention(id, state.behaviours);

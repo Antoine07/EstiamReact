@@ -21,7 +21,7 @@ const itemStudent = {
   marginBottom: 2
 }
 
-const StudentsScreen = ({ navigation }) => {
+const StudentsScreen = ({ navigation, route }) => {
   const [state, dispatch] = useContext(SchoolContext);
   const { students, order, behaviours } = state;
 
@@ -48,7 +48,7 @@ const StudentsScreen = ({ navigation }) => {
       <FlatList
         style={styles.containerStudent}
         keyExtractor={item => item.id.toString()}
-        data={students}
+        data={[ ...students ]}
         renderItem={({ item, index }) => {
           const { id, name, attendance, lessons, notes } = item;
 
@@ -76,10 +76,7 @@ const StudentsScreen = ({ navigation }) => {
             </TouchableOpacity>
           )
         }}
-
-
       >
-
       </FlatList>
     </SafeAreaView>
   );
