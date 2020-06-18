@@ -13,11 +13,17 @@
     <div id="root"></div>
     <script type="text/babel">
 
-        const App = () =>{
+        const triggerFunc = new Set();
+
+        const App = props => {
+
+            const [count, setCount] = React.useState(1);
+            const [pos, setPos] = React.useState(0);
 
             return (
                 <div className="container">
-                  
+                    <p>{count}</p>
+                    <p><button onClick={() => setCount(count => count + 1)}>Count + 1</button></p>
                 </div>
             )
         }
