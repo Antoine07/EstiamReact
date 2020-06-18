@@ -17,21 +17,23 @@
             const [count, setCount] = React.useState(1);
 
             // Même référence dans la ménoire
-            const interval = React.useRef(null);
+            const intervalRef = React.useRef(null); // null valeur d'initialisation ...
 
             React.useEffect(() => {
 
-                if( interval.current === null ){
-                    interval.current = setInterval(() => {
+                if( intervalRef.current == null ){
+
+                    console.log('start ...');
+                   
+                    intervalRef.current = setInterval(() => {
                         setCount(count => count + 1);
                     }, 1000);
                 }
+
+                console.log('useEffect :', count);
                     
-
                 return () => {
-                    console.log(interval.current);
-
-                    if( interval.current ){ clearInterval(interval.current) ; interval.current = null }
+                  
                 };
             }, [count])
 
