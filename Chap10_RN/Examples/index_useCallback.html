@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <metacharset="UTF-8" />
+    <title>Hello React</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        const triggerFunc = new Set();
+
+        const App = props => {
+
+            const [count, setCount] = React.useState(1);
+            const [pos, setPos] = React.useState(1);
+
+            const incrementCount = React.useCallback( () => setCount(count => count + 1), [pos] );
+
+            triggerFunc.add(incrementCount);
+
+            return (
+                <div className="container">
+                    <p>Counter : {count}</p>
+                    <p><button onClick={incrementCount}>Count + 1</button></p>
+                    <p>Nombre de fonction créée : {triggerFunc.size} </p>
+                    <p><button onClick={() => setPos( pos => pos + 1 )}>Pos + 1</button></p>
+                </div>
+            )
+        }
+
+        ReactDOM.render(
+            <App />,
+            document.getElementById('root') // montage de deux composants
+        );
+    </script>
+</body>
+
+</html>
