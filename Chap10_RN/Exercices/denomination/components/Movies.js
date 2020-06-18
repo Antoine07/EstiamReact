@@ -14,10 +14,11 @@ const Movies = props => {
             showMovies: state.movies.showMovies
         }
     });
+    // 04 75 35 84 28
 
     if (showMovies)
         return (
-            <View style={{ flex: 1, padding: 24 }}>
+            <View style={{ flex: 1, padding: 10 }}>
                 <FlatList
                     data={movies}
                     keyExtractor={({ id }, index) => id}
