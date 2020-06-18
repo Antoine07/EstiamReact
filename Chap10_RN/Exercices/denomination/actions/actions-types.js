@@ -1,4 +1,4 @@
-import { SET_AMOUNT, CALCUL_TOKENS, RESET } from '../constants/actions';
+import { SET_AMOUNT, CALCUL_TOKENS, RESET, GET_HISTORY } from '../constants/actions';
 
 export const setAmount = payload => {
 
@@ -23,24 +23,17 @@ export const reset = () => {
 
 // Asynchrone
 
-const INCREMENT_COUNTER = 'INCREMENT_COUNTER';
-
-export const increment = payload => {
+export const getHistory = () => {
     return {
-        type: INCREMENT_COUNTER, payload
+        type: GET_HISTORY
     };
 }
 
-let interval = null;
+export const fetchHistory = () => {
 
-export const incrementAsync = payload => {
-    return (dispatch) => {
-
-        clearInterval(interval);
-
-        interval = setInterval(() => {
-
-            dispatch(increment(payload));
+    return dispatch => {
+        setTimeout(() => {
+            dispatch(getHistory());
         }, 2000);
     };
 }
