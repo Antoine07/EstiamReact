@@ -18,12 +18,16 @@
         const App = props => {
 
             const [count, setCount] = React.useState(1);
-            const [pos, setPos] = React.useState(0);
+
+            const incrementCount = () => setCount(count => count + 1);
+
+            triggerFunc.add(incrementCount);
 
             return (
                 <div className="container">
-                    <p>{count}</p>
-                    <p><button onClick={() => setCount(count => count + 1)}>Count + 1</button></p>
+                    <p>Counter : {count}</p>
+                    <p><button onClick={incrementCount}>Count + 1</button></p>
+                    <p>Nombre de fonction créée : {triggerFunc.size} </p>
                 </div>
             )
         }
