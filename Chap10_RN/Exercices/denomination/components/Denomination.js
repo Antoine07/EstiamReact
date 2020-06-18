@@ -67,7 +67,6 @@ const Denomination = props => {
                 style={styles.input}
                 onChangeText={text => dispatch(setAmount(text))}
                 value={amount.toString()}
-
             />
             <TouchableOpacity
                 style={styles.btn}
